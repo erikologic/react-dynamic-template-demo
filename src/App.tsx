@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Grid2 as Grid } from '@mui/material';
 import { BarChart, Gauge, LineChart, lineElementClasses, PieChart  } from '@mui/x-charts';
+import { LabelProps, LabelsProps } from './type';
 
 const data: Record<string, any> = {
   uv: [4000, 3000, 2000, 2780, 1890, 2390, 3490],
@@ -17,13 +18,9 @@ const data: Record<string, any> = {
   ]
 }
 
-interface LabelsProps {
-  labels: string[];
-}
 function SimpleBarChart({labels}: LabelsProps) {
   return (
     <BarChart
-      width={500}
       height={300}
       series={labels.map((label) => ({label, data: data[label]}))}
       xAxis={[{ data: data.xLabels, scaleType: 'band' }]}
@@ -35,7 +32,6 @@ function SimpleBarChart({labels}: LabelsProps) {
 function SimpleLineChart({labels}: LabelsProps) {
   return (
     <LineChart
-      width={500}
       height={300}
       series={labels.map((label) => ({label, data: data[label]}))}
       xAxis={[{ data: data.xLabels, scaleType: 'point' }]}
@@ -46,7 +42,6 @@ function SimpleLineChart({labels}: LabelsProps) {
 function StackedAreaChart({labels}: LabelsProps) {
   return (
     <LineChart
-      width={500}
       height={300}
       series={labels.map((label) => ({label, data: data[label], area: true, stack: 'total', showMark: false }))}
       xAxis={[{ data: data.xLabels, scaleType: 'point' }]}
@@ -77,9 +72,6 @@ function StraightAnglePieChart({labels}: LabelsProps) {
   );
 }
 
-interface LabelProps {
-  label: string
-}
 const SimpleGauge = ({label}: LabelProps) => 
   <Container>
     <h3>
