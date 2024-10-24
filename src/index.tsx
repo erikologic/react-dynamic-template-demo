@@ -4,17 +4,25 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ErrorPage from './ErrorPage';
+import { Layout } from './Layout';
+
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <App />,
-    errorElement: <ErrorPage />,
+    element: <Layout/>,
+    children: [
+      {
+        path: "/",
+        element: <App />,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: "/about",
+        element: <div>About us</div>,
+      },
+    ]
   },
-  {
-    path: "/about",
-    element: <div>About us</div>,
-  },
+  
 ]);
 
 const root = ReactDOM.createRoot(

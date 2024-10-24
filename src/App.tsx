@@ -1,12 +1,24 @@
 import React from 'react';
-import Button from '@mui/material/Button';
+import { Box, Grid2 as Grid } from '@mui/material';
 
 function App() {
   return (
-    <>
-       <Button variant="contained">Hello world</Button>
-    </>
-  );
+
+      <Grid container spacing={2}>
+        <Grid size={6}>
+          <Box sx={{backgroundColor: "blue", padding: "1rem 0 1rem 0"}}>size=6</Box>
+        </Grid>
+        <Grid size={6}>
+          <Box sx={{backgroundColor: "blue", padding: "1rem 0 1rem 0"}}>size=6</Box>
+        </Grid>
+        <Grid size={6}>
+          <Box sx={{backgroundColor: "blue", padding: "1rem 0 1rem 0"}}>size=6</Box>
+        </Grid>
+        <Grid size={6}>
+          <Box sx={{backgroundColor: "blue", padding: "1rem 0 1rem 0"}}>size=6</Box>
+        </Grid>
+      </Grid>
+  )
 }
 
 export default App;
