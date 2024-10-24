@@ -2,56 +2,54 @@ import React from 'react';
 import { Container, Grid2 as Grid } from '@mui/material';
 import { BarChart, Gauge, LineChart, lineElementClasses, PieChart  } from '@mui/x-charts';
 
-const uData = [4000, 3000, 2000, 2780, 1890, 2390, 3490];
-const pData = [2400, 1398, 9800, 3908, 4800, 3800, 4300];
-const xLabels = [
-  'Page A',
-  'Page B',
-  'Page C',
-  'Page D',
-  'Page E',
-  'Page F',
-  'Page G',
-];
+const data: Record<string, any> = {
+  uv: [4000, 3000, 2000, 2780, 1890, 2390, 3490],
+  pv: [2400, 1398, 9800, 3908, 4800, 3800, 4300],
+  amt: [2400, 2210, 0, 2000, 2181, 2500, 2100],
+  xLabels: [
+    'Page A',
+    'Page B',
+    'Page C',
+    'Page D',
+    'Page E',
+    'Page F',
+    'Page G',
+  ]
+}
 
-function SimpleBarChart() {
+interface LabelsProps {
+  labels: string[];
+}
+function SimpleBarChart({labels}: LabelsProps) {
   return (
     <BarChart
       width={500}
       height={300}
-      series={[
-        { data: pData, label: 'pv' },
-        { data: uData, label: 'uv' },
-      ]}
-      xAxis={[{ data: xLabels, scaleType: 'band' }]}
+      series={labels.map((label) => ({label, data: data[label]}))}
+      xAxis={[{ data: data.xLabels, scaleType: 'band' }]}
     />
   );
 }
 
-function SimpleLineChart() {
+
+function SimpleLineChart({labels}: LabelsProps) {
   return (
     <LineChart
       width={500}
       height={300}
-      series={[
-        { data: pData, label: 'pv' },
-        { data: uData, label: 'uv' },
-      ]}
-      xAxis={[{ scaleType: 'point', data: xLabels }]}
+      series={labels.map((label) => ({label, data: data[label]}))}
+      xAxis={[{ data: data.xLabels, scaleType: 'point' }]}
     />
   );
 }
 
-function StackedAreaChart() {
+function StackedAreaChart({labels}: LabelsProps) {
   return (
     <LineChart
       width={500}
       height={300}
-      series={[
-        { data: uData, label: 'uv', area: true, stack: 'total', showMark: false },
-        { data: pData, label: 'pv', area: true, stack: 'total', showMark: false },
-      ]}
-      xAxis={[{ scaleType: 'point', data: xLabels }]}
+      series={labels.map((label) => ({label, data: data[label], area: true, stack: 'total', showMark: false }))}
+      xAxis={[{ data: data.xLabels, scaleType: 'point' }]}
       sx={{
         [`& .${lineElementClasses.root}`]: {
           display: 'none',
@@ -61,23 +59,17 @@ function StackedAreaChart() {
   );
 }
 
-function StraightAnglePieChart() {
+const getLatest = (label: string) => data[label][data[label].length -1]
+
+function StraightAnglePieChart({labels}: LabelsProps) {
   return (
     <PieChart
       series={[
         {
+          arcLabel: (item) => `${item.value}`,
           startAngle: -90,
           endAngle: 90,
-          data: [
-            {
-              label: "pv",
-              value: pData[pData.length -1]
-            },
-            {
-              label: "uv",
-              value: uData[uData.length -1]
-            }
-          ],
+          data: labels.map((label) => ({label, value: getLatest(label) }))
         },
       ]}
       height={300}
@@ -85,14 +77,17 @@ function StraightAnglePieChart() {
   );
 }
 
-const PvGauge = () => 
+interface LabelProps {
+  label: string
+}
+const SimpleGauge = ({label}: LabelProps) => 
   <Container>
     <h3>
-      Label: "pv"
+      Label: "{label}"
     </h3>
     <Gauge
       height={300} 
-      value={pData[pData.length -1]}
+      value={getLatest(label)}
       valueMax={5000}
     />
   </Container>
@@ -101,19 +96,25 @@ function App() {
   return (
       <Grid container spacing={2}>
         <Grid size={6}>
-          <SimpleBarChart />
+          <SimpleBarChart labels={["pv", "uv"]}/>
         </Grid>
         <Grid size={6}>
-          <SimpleLineChart />
+          <SimpleLineChart labels={["pv", "amt"]} />
         </Grid>
         <Grid size={6}>
-          <StackedAreaChart />
+          <StackedAreaChart labels={["amt", "uv"]} />
         </Grid>
         <Grid size={6}>
-          <StraightAnglePieChart />
+          <StraightAnglePieChart labels={["pv", "uv", "amt"]} />
         </Grid>
         <Grid size={6}>
-          <PvGauge />
+          <SimpleGauge label="pv"/>
+        </Grid>
+        <Grid size={6}>
+          <SimpleGauge label="uv"/>
+        </Grid>
+        <Grid size={6}>
+          <SimpleGauge label="amt"/>
         </Grid>
       </Grid>
   )
