@@ -1,20 +1,26 @@
-import { Box, Container, Grid2 as Grid } from '@mui/material';
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { AppBar, Button, Container, Grid, Toolbar, Typography } from '@mui/material';
+import { Link, Outlet } from 'react-router-dom';
 
-export const Layout: React.FC<React.PropsWithChildren> = ({children}) =>  
-    <Container disableGutters={true} sx={{backgroundColor: "green"}}>
-      <Grid container spacing={2} sx={{paddingBottom: "1rem"}}>
-        <Grid size={4}>
-          <Box sx={{backgroundColor: "red", padding: "1rem 0 1rem 0"}}>size=4</Box>
-        </Grid>
-        <Grid size={4}>
-          <Box sx={{backgroundColor: "red", padding: "1rem 0 1rem 0"}}>size=4</Box>
-        </Grid>
-        <Grid size={4}>
-          <Box sx={{backgroundColor: "red", padding: "1rem 0 1rem 0"}}>size=4</Box>
-        </Grid>
-      </Grid>
-    
-      <Outlet/>
-</Container>;
+export const Layout: React.FC<React.PropsWithChildren> = () => (
+  <Container disableGutters={true} sx={{ backgroundColor: "green" }}>
+    <AppBar position="static">
+      <Toolbar>
+        <Typography variant="h6" style={{ flexGrow: 1 }}>
+          My App
+        </Typography>
+        <Button color="inherit" component={Link} to="/" sx={{ mx: 'auto' }}>
+          Dashboard
+        </Button>
+        <Button color="inherit" component={Link} to="/form-editor" sx={{ mx: 'auto' }}>
+          Form Editor
+        </Button>
+        <Button color="inherit" component={Link} to="/json-editor" sx={{ mx: 'auto' }}>
+          JSON Editor
+        </Button>
+      </Toolbar>
+    </AppBar>
+  
+    <Outlet />
+  </Container>
+);
