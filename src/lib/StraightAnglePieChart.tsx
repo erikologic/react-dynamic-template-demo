@@ -1,8 +1,18 @@
 import { PieChart } from "@mui/x-charts";
-import { LabelsProps } from "../type";
 import { getLatest } from "./helpers";
+import { Type, type Static } from '@sinclair/typebox'
 
-export default function StraightAnglePieChart({labels, fullPage}: LabelsProps) {
+const componentConfig = Type.Object({
+    type: Type.Const("pie"),
+    props: Type.Object({
+        labels: Type.Array(Type.String()),
+        fullPage: Type.Optional(Type.Boolean())
+    }),
+})
+
+type ComponentConfig = Static<typeof componentConfig>;
+
+export function StraightAnglePieChart({labels, fullPage}: ComponentConfig["props"]) {
     return (
       <PieChart
         series={[

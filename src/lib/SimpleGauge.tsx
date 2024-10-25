@@ -1,9 +1,19 @@
 import { Container } from "@mui/material";
 import { Gauge } from "@mui/x-charts";
-import { LabelProps } from "../type";
 import { getLatest } from "./helpers";
+import { Type, type Static } from '@sinclair/typebox'
 
-export default function SimpleGauge ({label}: LabelProps) {
+const componentConfig = Type.Object({
+    type: Type.Const("gauge"),
+    props: Type.Object({
+        label: Type.String(),
+    }),
+})
+
+type ComponentConfig = Static<typeof componentConfig>;
+
+
+export function SimpleGauge ({label}: ComponentConfig["props"]) {
     return <Container>
         <h3>
         Label: "{label}"

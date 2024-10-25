@@ -1,8 +1,18 @@
 import { LineChart } from "@mui/x-charts";
 import { data } from "../data";
-import { LabelsProps } from "../type";
+import { Type, type Static } from '@sinclair/typebox'
 
-export default function SimpleLineChart({labels, fullPage}: LabelsProps) {
+const componentConfig = Type.Object({
+    type: Type.Const("line"),
+    props: Type.Object({
+        labels: Type.Array(Type.String()),
+        fullPage: Type.Optional(Type.Boolean())
+    }),
+})
+
+type ComponentConfig = Static<typeof componentConfig>;
+
+export function SimpleLineChart({labels, fullPage}: ComponentConfig["props"]) {
     return (
       <LineChart
         height={fullPage ? 800 : 300}

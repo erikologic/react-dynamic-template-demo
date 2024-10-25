@@ -1,8 +1,18 @@
 import { BarChart } from "@mui/x-charts";
 import { data } from "../data";
-import { LabelsProps } from "../type";
+import { Type, type Static } from '@sinclair/typebox'
 
-export function SimpleBarChart({labels, fullPage}: LabelsProps) {
+const componentConfig = Type.Object({
+    type: Type.Const("bar"),
+    props: Type.Object({
+        labels: Type.Array(Type.String()),
+        fullPage: Type.Optional(Type.Boolean())
+    }),
+})
+
+type ComponentConfig = Static<typeof componentConfig>;
+
+export function SimpleBarChart({labels, fullPage}: ComponentConfig["props"]) {
     return (
       <BarChart
         height={fullPage ? 800 : 300}

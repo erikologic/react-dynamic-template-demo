@@ -1,9 +1,9 @@
 import { Grid2 as Grid } from "@mui/material";
 import { SimpleBarChart } from "./lib/SimpleBarChart";
-import SimpleGauge from "./lib/SimpleGauge";
-import SimpleLineChart from "./lib/SimpleLineChart";
-import StackedAreaChart from "./lib/StackedAreaChart";
-import StraightAnglePieChart from "./lib/StraightAnglePieChart";
+import {SimpleGauge} from "./lib/SimpleGauge";
+import {SimpleLineChart} from "./lib/SimpleLineChart";
+import {StackedAreaChart} from "./lib/StackedAreaChart";
+import {StraightAnglePieChart} from "./lib/StraightAnglePieChart";
 
 const props = [
   {
