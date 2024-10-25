@@ -5,6 +5,8 @@ import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ErrorPage from './ErrorPage';
 import { Layout } from './Layout';
+import FormEditor from './FormEditor';
+import JsonEditor from './JsonEditor';
 
 
 const router = createBrowserRouter([
@@ -17,9 +19,13 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
       },
       {
-        path: "/about",
-        element: <div>About us</div>,
+        path: "/form-editor",
+        element: <FormEditor />,
       },
+      {
+        path: "/json-editor",
+        element: <JsonEditor />,
+      }
     ]
   },
   

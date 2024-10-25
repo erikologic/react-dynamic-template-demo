@@ -3,11 +3,11 @@ import { AppBar, Button, Container, Grid, Toolbar, Typography } from '@mui/mater
 import { Link, Outlet } from 'react-router-dom';
 
 export const Layout: React.FC<React.PropsWithChildren> = () => (
-  <Container disableGutters={true} sx={{ backgroundColor: "green" }}>
+  <Container disableGutters={true}>
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" style={{ flexGrow: 1 }}>
-          My App
+          My Dynamic Dashboard App
         </Typography>
         <Button color="inherit" component={Link} to="/" sx={{ mx: 'auto' }}>
           Dashboard
@@ -21,6 +21,8 @@ export const Layout: React.FC<React.PropsWithChildren> = () => (
       </Toolbar>
     </AppBar>
   
-    <Outlet />
+   <Container disableGutters={true}>
+      <Outlet />
+    </Container>
   </Container>
 );
