@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppBar, Button, Container, Grid, Toolbar, Typography } from '@mui/material';
+import { AppBar, Button, Container, Toolbar, Typography } from '@mui/material';
 import { Link, Outlet } from 'react-router-dom';
 
 export const Layout: React.FC<React.PropsWithChildren> = () => (

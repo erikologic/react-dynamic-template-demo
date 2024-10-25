@@ -1,5 +1,5 @@
 import { PieChart } from "@mui/x-charts";
-import { getLatest } from "./helpers";
+import { getLatest } from "../helpers";
 import { Type, type Static } from '@sinclair/typebox'
 
 const componentConfig = Type.Object({

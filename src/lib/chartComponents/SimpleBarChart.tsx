@@ -1,9 +1,9 @@
-import { LineChart } from "@mui/x-charts";
-import { data } from "../data";
+import { BarChart } from "@mui/x-charts";
+import { data } from "../../data";
 import { Type, type Static } from '@sinclair/typebox'
 
 const componentConfig = Type.Object({
-    type: Type.Const("line"),
+    type: Type.Const("bar"),
     props: Type.Object({
         labels: Type.Array(Type.String()),
         fullPage: Type.Optional(Type.Boolean())
@@ -12,13 +12,12 @@ const componentConfig = Type.Object({
 
 type ComponentConfig = Static<typeof componentConfig>;
 
-export function SimpleLineChart({labels, fullPage}: ComponentConfig["props"]) {
+export function SimpleBarChart({labels, fullPage}: ComponentConfig["props"]) {
     return (
-      <LineChart
+      <BarChart
         height={fullPage ? 800 : 300}
         series={labels.map((label) => ({label, data: data[label]}))}
-        xAxis={[{ data: data.xLabels, scaleType: 'point' }]}
+        xAxis={[{ data: data.xLabels, scaleType: 'band' }]}
       />
     );
   }
-  

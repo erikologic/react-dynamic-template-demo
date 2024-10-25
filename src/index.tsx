@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Dashboard from './Dashboard';
+import Dashboard from './pages/Dashboard';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import ErrorPage from './ErrorPage';
-import { Layout } from './Layout';
-import FormEditor from './FormEditor';
-import JsonEditor from './JsonEditor';
+import ErrorPage from './pages/ErrorPage';
+import { Layout } from './pages/Layout';
+import FormEditor from './pages/FormEditor';
+import JsonEditor from './pages/JsonEditor';
 
 
 const router = createBrowserRouter([

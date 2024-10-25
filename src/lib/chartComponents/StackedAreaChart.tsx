@@ -1,5 +1,5 @@
 import { LineChart, lineElementClasses } from "@mui/x-charts";
-import { data } from "../data";
+import { data } from "../../data";
 import { Type, type Static } from '@sinclair/typebox'
 
 const componentConfig = Type.Object({
