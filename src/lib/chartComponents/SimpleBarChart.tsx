@@ -1,23 +1,23 @@
 import { BarChart } from "@mui/x-charts";
 import { data } from "../../data";
-import { Type, type Static } from '@sinclair/typebox'
+import { Type, Static } from '@sinclair/typebox'
 
-const componentConfig = Type.Object({
-    type: Type.Const("bar"),
-    props: Type.Object({
-        labels: Type.Array(Type.String()),
-        fullPage: Type.Optional(Type.Boolean())
-    }),
+export const barChartSchema = Type.Object({
+  type: Type.Const("bar"),
+  props: Type.Object({
+    labels: Type.Array(Type.String()),
+    fullPage: Type.Optional(Type.Boolean())
+  }),
 })
 
-type ComponentConfig = Static<typeof componentConfig>;
+type BarChartSchema = Static<typeof barChartSchema>;
 
-export function SimpleBarChart({labels, fullPage}: ComponentConfig["props"]) {
-    return (
-      <BarChart
-        height={fullPage ? 800 : 300}
-        series={labels.map((label) => ({label, data: data[label]}))}
-        xAxis={[{ data: data.xLabels, scaleType: 'band' }]}
-      />
-    );
-  }
+export function SimpleBarChart({ labels, fullPage }: BarChartSchema["props"]) {
+  return (
+    <BarChart
+      height={fullPage ? 800 : 300}
+      series={labels.map((label) => ({ label, data: data[label] }))}
+      xAxis={[{ data: data.xLabels, scaleType: 'band' }]}
+    />
+  );
+}
