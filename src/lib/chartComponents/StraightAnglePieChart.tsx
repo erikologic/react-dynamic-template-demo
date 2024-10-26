@@ -1,12 +1,20 @@
 import { PieChart } from "@mui/x-charts";
 import { getLatest } from "../helpers";
 import { Type, type Static } from "@sinclair/typebox";
+import { labelSchema } from "../../labels";
 
 export const pieChartSchema = Type.Object({
   type: Type.Const("pie"),
   props: Type.Object({
-    labels: Type.Array(Type.String()),
-    fullPage: Type.Optional(Type.Boolean()),
+    labels: Type.Array(labelSchema, {
+      title: "Pie Chart Labels",
+      description: "The labels to display on the pie chart",
+    }),
+    fullPage: Type.Optional(
+      Type.Boolean({
+        title: "Should the chart occupy the full page?",
+      }),
+    ),
   }),
 });
 

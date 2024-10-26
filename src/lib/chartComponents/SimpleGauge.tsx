@@ -2,13 +2,19 @@ import { Container } from "@mui/material";
 import { Gauge } from "@mui/x-charts";
 import { getLatest } from "../helpers";
 import { Type, Static } from "@sinclair/typebox";
-
-export const gaugeSchema = Type.Object({
-  type: Type.Const("gauge"),
-  props: Type.Object({
-    label: Type.String(),
-  }),
-});
+import { labelSchema } from "../../labels";
+export const gaugeSchema = Type.Object(
+  {
+    type: Type.Const("gauge"),
+    props: Type.Object({
+      label: labelSchema,
+    }),
+  },
+  {
+    title: "Gauge Schema",
+    description: "A schema for a simple gauge component",
+  },
+);
 
 type GaugeSchema = Static<typeof gaugeSchema>;
 
