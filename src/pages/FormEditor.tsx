@@ -1,30 +1,29 @@
 import { FunctionComponent } from "react";
-import { RJSFSchema } from '@rjsf/utils';
 import validator from '@rjsf/validator-ajv8';
 import { withTheme } from '@rjsf/core';
 import { Theme } from '@rjsf/mui';
+import { jsonSchema } from "../jsonSchema";
+import { getConfig, setConfig } from "../configuration";
 
-const schema: RJSFSchema = {
-  title: 'Todo',
-  type: 'object',
-  required: ['title'],
-  properties: {
-    title: { type: 'string', title: 'Title', default: 'A new task' },
-    done: { type: 'boolean', title: 'Done?', default: false },
-  },
-};
 
 const log = (type: any) => console.log.bind(console, type);
 const Form = withTheme(Theme);
 
+function saveConf(event: any) {
+    setConfig(event.formData);
+    window.alert("Reloading page to reflect changes");
+    window.location.reload();
+}
+
 const FormEditor: FunctionComponent = () =>
     (
         <Form
-          schema={schema}
-          validator={validator}
-          onChange={log('changed')}
-          onSubmit={log('submitted')}
-          onError={log('errors')}
+            formData={getConfig()}
+            schema={jsonSchema}
+            validator={validator}
+            onChange={log('changed')}
+            onSubmit={saveConf}
+            onError={log('errors')}
         />
       );
  
