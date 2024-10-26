@@ -25,6 +25,12 @@ const defaultConf: Config = [
     },
   },
   {
+    type: "pie",
+    props: {
+      labels: [Label.pv, Label.uv, Label.amt],
+    },
+  },
+  {
     type: "gauge",
     props: {
       label: Label.pv,
