@@ -5,20 +5,26 @@ import { labelSchema } from "../../labels";
 
 export const slug = "pie";
 
-export const jsonSchema = Type.Object({
-  type: Type.Literal(slug),
-  props: Type.Object({
-    labels: Type.Array(labelSchema, {
-      title: "Pie Chart Labels",
-      description: "The labels to display on the pie chart",
-    }),
-    fullPage: Type.Optional(
-      Type.Boolean({
-        title: "Should the chart occupy the full page?",
+export const jsonSchema = Type.Object(
+  {
+    type: Type.Literal(slug),
+    props: Type.Object({
+      labels: Type.Array(labelSchema, {
+        title: "Pie Chart Labels",
+        description: "The labels to display on the pie chart",
       }),
-    ),
-  }),
-});
+      fullPage: Type.Optional(
+        Type.Boolean({
+          title: "Should the chart occupy the full page?",
+        }),
+      ),
+    }),
+  },
+  {
+    title: "Pie Chart",
+    description: "A simple pie chart",
+  },
+);
 
 type PieChartSchema = Static<typeof jsonSchema>;
 

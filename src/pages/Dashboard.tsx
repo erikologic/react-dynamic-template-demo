@@ -2,6 +2,7 @@ import { Grid2 as Grid } from "@mui/material";
 import { TypeToComp } from "../lib/TypeToComp";
 import { getConfig } from "../configuration";
 
+// TODO: Fix type
 function renderComponent(compProps: any, key: number) {
   const type = compProps.type;
   const Component = TypeToComp[type];
