@@ -6,9 +6,17 @@ import { labelSchema } from "../../labels";
 export const barChartSchema = Type.Object({
   type: Type.Const("bar"),
   props: Type.Object({
-    labels: Type.Array(labelSchema),
-    fullPage: Type.Optional(Type.Boolean())
-  }),
+    labels: Type.Array(labelSchema, {
+      minItems: 1,
+      maxItems: 3,
+      title: "Bar Chart Labels",
+      description: "The labels to display on the bar chart"
+    }),
+    fullWidth: Type.Optional(Type.Boolean({ title: "Should the chart occupy the full width?" })),
+  },
+{
+  title: "Bar Chart Properties"
+}),
 }, {
   title: "Bar Chart",
   description: "A simple bar chart",
@@ -16,10 +24,10 @@ export const barChartSchema = Type.Object({
 
 type BarChartSchema = Static<typeof barChartSchema>;
 
-export function SimpleBarChart({ labels, fullPage }: BarChartSchema["props"]) {
+export function SimpleBarChart({ labels, fullWidth }: BarChartSchema["props"]) {
   return (
     <BarChart
-      height={fullPage ? 800 : 300}
+      height={fullWidth ? 800 : 300}
       series={labels.map((label) => ({ label, data: data[label] }))}
       xAxis={[{ data: data.xLabels, scaleType: 'band' }]}
     />
