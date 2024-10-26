@@ -3,8 +3,10 @@ import { getLatest } from "../helpers";
 import { Type, type Static } from "@sinclair/typebox";
 import { labelSchema } from "../../labels";
 
-export const pieChartSchema = Type.Object({
-  type: Type.Const("pie"),
+export const slug = "pie";
+
+export const jsonSchema = Type.Object({
+  type: Type.Const(slug),
   props: Type.Object({
     labels: Type.Array(labelSchema, {
       title: "Pie Chart Labels",
@@ -18,12 +20,9 @@ export const pieChartSchema = Type.Object({
   }),
 });
 
-type PieChartSchema = Static<typeof pieChartSchema>;
+type PieChartSchema = Static<typeof jsonSchema>;
 
-export function StraightAnglePieChart({
-  labels,
-  fullPage,
-}: PieChartSchema["props"]) {
+export function Component({ labels, fullPage }: PieChartSchema["props"]) {
   return (
     <PieChart
       series={[

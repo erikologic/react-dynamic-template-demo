@@ -3,7 +3,9 @@ import { data } from "../../data";
 import { Type, Static } from "@sinclair/typebox";
 import { labelSchema } from "../../labels";
 
-export const lineChartSchema = Type.Object(
+export const slug = "line";
+
+export const jsonSchema = Type.Object(
   {
     type: Type.Const("line"),
     props: Type.Object({
@@ -21,12 +23,9 @@ export const lineChartSchema = Type.Object(
   },
 );
 
-type LineChartSchema = Static<typeof lineChartSchema>;
+type LineChartSchema = Static<typeof jsonSchema>;
 
-export function SimpleLineChart({
-  labels,
-  fullPage,
-}: LineChartSchema["props"]) {
+export function Component({ labels, fullPage }: LineChartSchema["props"]) {
   return (
     <LineChart
       height={fullPage ? 800 : 300}

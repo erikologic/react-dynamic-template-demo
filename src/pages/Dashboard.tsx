@@ -4,7 +4,6 @@ import { getConfig } from "../configuration";
 
 function renderComponent(compProps: any, key: number) {
   const type = compProps.type;
-  // @ts-ignore
   const Component = TypeToComp[type];
   return (
     <Grid key={key} size={6}>

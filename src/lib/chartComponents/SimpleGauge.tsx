@@ -3,9 +3,12 @@ import { Gauge } from "@mui/x-charts";
 import { getLatest } from "../helpers";
 import { Type, Static } from "@sinclair/typebox";
 import { labelSchema } from "../../labels";
-export const gaugeSchema = Type.Object(
+
+export const slug = "gauge";
+
+export const jsonSchema = Type.Object(
   {
-    type: Type.Const("gauge"),
+    type: Type.Const(slug),
     props: Type.Object({
       label: labelSchema,
     }),
@@ -16,9 +19,9 @@ export const gaugeSchema = Type.Object(
   },
 );
 
-type GaugeSchema = Static<typeof gaugeSchema>;
+type GaugeSchema = Static<typeof jsonSchema>;
 
-export function SimpleGauge({ label }: GaugeSchema["props"]) {
+export function Component({ label }: GaugeSchema["props"]) {
   return (
     <Container>
       <h3>Label: "{label}"</h3>

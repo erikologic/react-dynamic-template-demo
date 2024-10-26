@@ -3,8 +3,10 @@ import { data } from "../../data";
 import { Type, Static } from "@sinclair/typebox";
 import { labelSchema } from "../../labels";
 
-export const areaChartSchema = Type.Object({
-  type: Type.Const("area"),
+export const slug = "area";
+
+export const jsonSchema = Type.Object({
+  type: Type.Const(slug),
   props: Type.Object(
     {
       labels: Type.Array(labelSchema, {
@@ -26,12 +28,9 @@ export const areaChartSchema = Type.Object({
   ),
 });
 
-type AreaChartSchema = Static<typeof areaChartSchema>;
+type AreaChartSchema = Static<typeof jsonSchema>;
 
-export function StackedAreaChart({
-  labels,
-  fullPage,
-}: AreaChartSchema["props"]) {
+export function Component({ labels, fullPage }: AreaChartSchema["props"]) {
   return (
     <LineChart
       height={fullPage ? 800 : 300}

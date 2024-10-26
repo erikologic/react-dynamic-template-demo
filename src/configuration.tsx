@@ -3,6 +3,7 @@ import { jsonSchema } from "./jsonSchema";
 import { Label } from "./labels";
 
 type Config = Static<typeof jsonSchema>;
+export type ConfigItem = Config[number];
 
 const defaultConf: Config = [
   {

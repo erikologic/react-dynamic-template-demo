@@ -3,9 +3,11 @@ import { data } from "../../data";
 import { Type, Static } from "@sinclair/typebox";
 import { labelSchema } from "../../labels";
 
-export const barChartSchema = Type.Object(
+export const slug = "bar";
+
+export const jsonSchema = Type.Object(
   {
-    type: Type.Const("bar"),
+    type: Type.Const(slug),
     props: Type.Object(
       {
         labels: Type.Array(labelSchema, {
@@ -29,9 +31,9 @@ export const barChartSchema = Type.Object(
   },
 );
 
-type BarChartSchema = Static<typeof barChartSchema>;
+type BarChartSchema = Static<typeof jsonSchema>;
 
-export function SimpleBarChart({ labels, fullWidth }: BarChartSchema["props"]) {
+export function Component({ labels, fullWidth }: BarChartSchema["props"]) {
   return (
     <BarChart
       height={fullWidth ? 800 : 300}
