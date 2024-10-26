@@ -2,7 +2,7 @@ import { DiffEditor, Monaco } from "@monaco-editor/react";
 import { jsonSchema } from "../jsonSchema";
 import { AppBar, Button, Toolbar, Typography } from "@mui/material";
 import React, { useRef } from "react";
-import { getConfig, setConfig } from "../configuration";
+import { getConfig, putConfig } from "../configuration";
 
 function JsonSchema() {
   const monacoRef = useRef<Monaco | null>(null);
@@ -23,13 +23,13 @@ function JsonSchema() {
 
   function saveConf() {
     const modifiedJson = monacoRef.current?.editor.getModels()[1].getValue()!;
-    setConfig(JSON.parse(modifiedJson));
+    putConfig(JSON.parse(modifiedJson));
     window.alert("Reloading page to reflect changes");
     window.location.reload();
   }
 
   function resetConf() {
-    setConfig();
+    putConfig();
     window.alert("Reloading page to reflect changes");
     window.location.reload();
   }

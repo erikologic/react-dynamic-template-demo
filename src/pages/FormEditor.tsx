@@ -3,13 +3,13 @@ import validator from "@rjsf/validator-ajv8";
 import { withTheme } from "@rjsf/core";
 import { Theme } from "@rjsf/mui";
 import { jsonSchema } from "../jsonSchema";
-import { getConfig, setConfig } from "../configuration";
+import { getConfig, putConfig } from "../configuration";
 
 const log = (type: any) => console.log.bind(console, type);
 const Form = withTheme(Theme);
 
 function saveConf(event: any) {
-  setConfig(event.formData);
+  putConfig(event.formData);
   window.alert("Reloading page to reflect changes");
   window.location.reload();
 }

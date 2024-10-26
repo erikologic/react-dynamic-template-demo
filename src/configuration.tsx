@@ -55,7 +55,7 @@ export const getConfig = (): Config => {
   return localConfig ? JSON.parse(localConfig) : defaultConf;
 };
 
-export const setConfig = (config?: Config) => {
+export const putConfig = (config?: Config) => {
   localStorage.setItem(
     "dashboardConfig",
     JSON.stringify(config || defaultConf),
