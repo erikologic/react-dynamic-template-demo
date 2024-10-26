@@ -8,16 +8,15 @@ function renderComponent(compProps: any, key: number) {
   const Component = TypeToComp[type];
   return (
     <Grid size={6}>
-      <Component key={key} {...{...compProps.props}} />
+      <Component key={key} {...{ ...compProps.props }} />
     </Grid>
-  )
-
+  );
 }
 
 export default function Dashboard() {
   return (
-      <Grid container spacing={2}>
-        {getConfig().map((prop, i) => renderComponent(prop, i))}
-      </Grid>
-  )
+    <Grid container spacing={2}>
+      {getConfig().map((prop, i) => renderComponent(prop, i))}
+    </Grid>
+  );
 }

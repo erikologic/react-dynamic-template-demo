@@ -1,17 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import Dashboard from './pages/Dashboard';
-import reportWebVitals from './reportWebVitals';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import ErrorPage from './pages/ErrorPage';
-import { Layout } from './pages/Layout';
-import FormEditor from './pages/FormEditor';
-import JsonEditor from './pages/JsonEditor';
-
+import React from "react";
+import ReactDOM from "react-dom/client";
+import Dashboard from "./pages/Dashboard";
+import reportWebVitals from "./reportWebVitals";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import ErrorPage from "./pages/ErrorPage";
+import { Layout } from "./pages/Layout";
+import FormEditor from "./pages/FormEditor";
+import JsonEditor from "./pages/JsonEditor";
 
 const router = createBrowserRouter([
   {
-    element: <Layout/>,
+    element: <Layout />,
     children: [
       {
         path: "/",
@@ -25,19 +24,18 @@ const router = createBrowserRouter([
       {
         path: "/json-editor",
         element: <JsonEditor />,
-      }
-    ]
+      },
+    ],
   },
-  
 ]);
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement,
 );
 root.render(
   <React.StrictMode>
     <RouterProvider router={router} />
-  </React.StrictMode>
+  </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function

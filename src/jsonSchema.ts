@@ -5,7 +5,12 @@ import { lineChartSchema } from "./lib/chartComponents/SimpleLineChart";
 import { areaChartSchema } from "./lib/chartComponents/StackedAreaChart";
 import { pieChartSchema } from "./lib/chartComponents/StraightAnglePieChart";
 
-export const jsonSchema = Type.Array(Type.Union([
-    barChartSchema, gaugeSchema, lineChartSchema, areaChartSchema, pieChartSchema
-  ]));
-  
+export const jsonSchema = Type.Array(
+  Type.Union([
+    barChartSchema,
+    gaugeSchema,
+    lineChartSchema,
+    areaChartSchema,
+    pieChartSchema,
+  ]),
+);

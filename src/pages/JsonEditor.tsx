@@ -1,8 +1,8 @@
-import { DiffEditor, Monaco } from '@monaco-editor/react';
-import { jsonSchema } from '../jsonSchema';
-import { AppBar, Button, Toolbar, Typography } from '@mui/material';
-import React, { useRef } from 'react';
-import { getConfig, setConfig } from '../configuration';
+import { DiffEditor, Monaco } from "@monaco-editor/react";
+import { jsonSchema } from "../jsonSchema";
+import { AppBar, Button, Toolbar, Typography } from "@mui/material";
+import React, { useRef } from "react";
+import { getConfig, setConfig } from "../configuration";
 
 function JsonSchema() {
   const monacoRef = useRef<Monaco | null>(null);
@@ -15,9 +15,9 @@ function JsonSchema() {
         {
           uri: "https://example.com/my-schema.json",
           fileMatch: ["*"],
-          schema: jsonSchema
-        }
-      ]
+          schema: jsonSchema,
+        },
+      ],
     });
   }
 
@@ -35,34 +35,38 @@ function JsonSchema() {
   }
 
   return (
-    <div style={{ height: '85vh' }}>
+    <div style={{ height: "85vh" }}>
       <AppBar position="relative" color="default">
         <Toolbar>
           <Typography variant="h6" style={{ flexGrow: 1 }}>
             JSON Editor
           </Typography>
-          <Button variant="contained" sx={{ mx: 'auto', marginRight: '1rem' }} onClick={resetConf}>
+          <Button
+            variant="contained"
+            sx={{ mx: "auto", marginRight: "1rem" }}
+            onClick={resetConf}
+          >
             Reset
           </Button>
-          <Button variant="contained" sx={{ mx: 'auto' }} onClick={saveConf}>
+          <Button variant="contained" sx={{ mx: "auto" }} onClick={saveConf}>
             Save
           </Button>
         </Toolbar>
       </AppBar>
-        <DiffEditor
-          height="100%"
-          original={JSON.stringify(getConfig(), null, 2)}
-          modified={JSON.stringify(getConfig(), null, 2)}
-          language="json"
-          theme="vs-dark"
-          beforeMount={handleEditorWillMount}
-          options={{
-            renderSideBySide: true,
-            readOnly: false,
-            glyphMargin: true,
-            quickSuggestions: true,
-          }}
-        />
+      <DiffEditor
+        height="100%"
+        original={JSON.stringify(getConfig(), null, 2)}
+        modified={JSON.stringify(getConfig(), null, 2)}
+        language="json"
+        theme="vs-dark"
+        beforeMount={handleEditorWillMount}
+        options={{
+          renderSideBySide: true,
+          readOnly: false,
+          glyphMargin: true,
+          quickSuggestions: true,
+        }}
+      />
     </div>
   );
 }

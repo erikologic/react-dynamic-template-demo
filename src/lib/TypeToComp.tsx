@@ -9,5 +9,5 @@ export const TypeToComp = {
   bar: SimpleBarChart,
   line: SimpleLineChart,
   area: StackedAreaChart,
-  pie: StraightAnglePieChart
+  pie: StraightAnglePieChart,
 };
