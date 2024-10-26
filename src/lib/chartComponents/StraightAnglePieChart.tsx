@@ -6,7 +6,7 @@ import { labelSchema } from "../../labels";
 export const slug = "pie";
 
 export const jsonSchema = Type.Object({
-  type: Type.Const(slug),
+  type: Type.Literal(slug),
   props: Type.Object({
     labels: Type.Array(labelSchema, {
       title: "Pie Chart Labels",

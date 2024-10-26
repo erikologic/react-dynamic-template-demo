@@ -7,7 +7,7 @@ export const slug = "line";
 
 export const jsonSchema = Type.Object(
   {
-    type: Type.Const("line"),
+    type: Type.Literal("line"),
     props: Type.Object({
       labels: Type.Array(labelSchema),
       fullPage: Type.Optional(
