@@ -1,7 +1,8 @@
 import { FunctionComponent } from "react";
-import Form from '@rjsf/core';
 import { RJSFSchema } from '@rjsf/utils';
 import validator from '@rjsf/validator-ajv8';
+import { withTheme } from '@rjsf/core';
+import { Theme } from '@rjsf/mui';
 
 const schema: RJSFSchema = {
   title: 'Todo',
@@ -14,6 +15,7 @@ const schema: RJSFSchema = {
 };
 
 const log = (type: any) => console.log.bind(console, type);
+const Form = withTheme(Theme);
 
 const FormEditor: FunctionComponent = () =>
     (
