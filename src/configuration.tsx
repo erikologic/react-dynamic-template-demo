@@ -1,54 +1,60 @@
-const defaultConf = [
+import { Static } from "@sinclair/typebox";
+import { jsonSchema } from "./jsonSchema";
+import { Label } from "./labels";
+
+type Config = Static<typeof jsonSchema>;
+
+const defaultConf: Config = [
   {
     type: "bar",
     props: {
-      labels: ["pv", "uv"],
+      labels: [Label.pv, Label.uv],
     },
   },
   {
     type: "line",
     props: {
-      labels: ["pv", "amt"],
+      labels: [Label.pv, Label.amt],
     },
   },
   {
     type: "area",
     props: {
-      labels: ["amt", "uv"],
+      labels: [Label.amt, Label.uv],
     },
   },
   {
     type: "pie",
     props: {
-      labels: ["pv", "uv", "amt"],
+      labels: [Label.pv, Label.uv, Label.amt],
     },
   },
   {
     type: "gauge",
     props: {
-      label: "pv",
+      label: Label.pv,
     },
   },
   {
     type: "gauge",
     props: {
-      label: "uv",
+      label: Label.uv,
     },
   },
   {
     type: "gauge",
     props: {
-      label: "amt",
+      label: Label.amt,
     },
   },
 ];
 
-export const getConfig = (): typeof defaultConf => {
+export const getConfig = (): Config => {
   const localConfig = localStorage.getItem("dashboardConfig");
   return localConfig ? JSON.parse(localConfig) : defaultConf;
 };
 
-export const setConfig = (config?: typeof defaultConf) => {
+export const setConfig = (config?: Config) => {
   localStorage.setItem(
     "dashboardConfig",
     JSON.stringify(config || defaultConf),
