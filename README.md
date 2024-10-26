@@ -1,46 +1,103 @@
-# Getting Started with Create React App
+# React Dynamic Templating Demo
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/erikologic/react-dynamic-template-demo)
 
-## Available Scripts
+This demo project showcases a type-safe, dynamic templating system in React, ideal for applications that need to adapt configurations to specific user requirements or scenarios.
 
-In the project directory, you can run:
+## Who Needs This?
 
-### `npm start`
+If you’re building a React application with a variety of complex, configurable features, this template helps by enabling 100% type-safe dynamic templating. It allows you to define components and layouts based on JSON schema, supporting seamless customization across scenarios without repetitive maintenance.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Technology Stack
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- **[React](https://react.dev/)**: uses `create-react-app` + `react-router-dom` just for demo purposes.
+- **[MUI](https://mui.com/material-ui/)**: Supplies fundamental UI components and charts.
+- **[TypeScript](https://www.typescriptlang.org/)**: Ensures type safety across components.
+- **[TypeBox](https://github.com/sinclairzx81/typebox)**: A TypeScript library for defining JSON schemas and extracting type-safe interfaces, making "impossible _configuration_ states impossible".
+- **[AJV](https://ajv.js.org/)**: A JSON schema validator to validate the configuration.
+- **[react-jsonschema-form](https://github.com/rjsf-team/react-jsonschema-form)**: Dynamically generates forms based on JSON schema definitions, allowing new fields and components to be added without additional code.
+- **[Monaco Editor](https://microsoft.github.io/monaco-editor/)**: Runs Visual Studio Code’s backend in the browser, providing a JSON editor with IntelliSense and diff support.
 
-### `npm test`
+## How It Works
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+This templating system utilizes JSON schema to configure component layouts, enabling dynamic form rendering and editable configurations. Here’s a breakdown of the main components:
 
-### `npm run build`
+- [`src/lib/chartComponents/*`](src/lib/chartComponents/SimpleBarChart.tsx)  
+   Contains the ChartComponents available in this demo. Each ChartComponent exports:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  - `slug`: a unique identifier for the component.
+  - `jsonSchema`: a schema describing the component’s configuration options.
+  - `Component`: the React component itself, which receives `Props` as defined by the `jsonSchema`.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- [`src/lib/chartComponents/index.ts`](src/lib/chartComponents/index.ts)  
+   Exports all ChartComponents in a single array.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- [`src/jsonSchema.ts`](src/jsonSchema.ts)  
+   Provides the JSON schema setup for data validation.
 
-### `npm run eject`
+- [`src/pages/configuration.tsx`](src/pages/configuration.tsx)  
+   Uses the Browser LocalStorage API to simulate a configuration repository.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- [`src/pages/Dashboard.tsx`](src/pages/Dashboard.tsx)  
+   Reads configuration settings and renders the appropriate components with their respective props.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- [`src/lib/TypeToComp.tsx`](src/lib/TypeToComp.tsx)  
+   A TypeScript utility that helps track and enforce correct types for each component.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- [`src/pages/FormEditor.tsx`](src/pages/FormEditor.tsx)  
+   Uses `rjsf` to render a form based on the JSON schema. This form is fully dynamic, meaning no additional code is required to add new fields or components.  
+   _`rjsf` is a neat library that can be customized including support for custom components. See their [Playground](https://rjsf-team.github.io/react-jsonschema-form/) for more examples._
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- [`src/pages/JsonEditor.tsx`](src/pages/JsonEditor.tsx)  
+   Utilizes Monaco Editor to edit JSON schema with a Diff view, supporting IntelliSense based on schema declarations.
 
-## Learn More
+### How Can I Rearrange the Dashboard?
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. Launch the app and change the configuration using either the Form or the JSON editor.
+2. Save, and the app will refresh to update the configuration.  
+   _Both the Form and JSON editor enforce validation to prevent invalid configurations from being stored._
+3. The Dashboard will then reflect the updated configuration.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### How Can I Add a New ChartComponent?
+
+1. Create a new ChartComponent in `src/lib/chartComponents/`.
+2. Export the required keys: `Component`, `jsonSchema`, `slug`.
+3. Add the new ChartComponent to the `charts` array in `src/lib/chartComponents/index.ts`.
+
+
+### Sounds Complicated, Can You Give Me an Example?
+
+
+Sure, check this commit [1fe4a03](https://github.com/erikologic/dynamic-template/commit/1fe4a036afd53fad83d8ac53e2ae13de880234e0)!
+
+The following files were modified:
+
+- `src/configuration.tsx`: to add a default configuration for the new component.
+- `src/lib/chartComponents/StraightAnglePieChart.tsx`: to create the new ChartComponent.
+- `src/lib/chartComponents/index.ts`: to export the new ChartComponent.
+
+## Missing Features In This Demo
+
+- **Templating for Routing**: Configurable paths and components that impact navigation.
+- **Configuration Backend**: including:
+  - Optimistic concurrency control to avoid overwriting changes made by others.
+  - Aliased configurations for easy comparison of different setups.
+- **Complex Nesting**: Support for even deeper and more nested component structures.
+- **RJSF UISchema and Custom Widgets**: More customization options for form generation.
+- **Monaco Diff/Single View Switch**: Enable users to toggle between views and collapse/expand JSON structures.
+- **Next.js Integration**: Combine this setup with Next.js for enhanced functionality.
+
+## Is This Production-Ready?
+
+Yes, it’s stable and running in production environments. We initially worried about non-engineers using the JSON editor, but it has proven intuitive even for less technical users.
+
+## I Find the Lack of Testing Disturbing
+
+I'm a TDD addict. I hear you.
+
+This system is 100% typesafe.  
+The only untested behavior is the configuration get/put functions, which can be tested with any of your regular Adapter testing strategies.
+
+## Contact
+
+[LinkedIn](https://www.linkedin.com/in/enrico-graziani-10ba5a140/).
