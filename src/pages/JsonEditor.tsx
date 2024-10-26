@@ -1,9 +1,29 @@
 import { DiffEditor, Monaco } from "@monaco-editor/react";
 import { jsonSchema } from "../jsonSchema";
 import { AppBar, Button, Toolbar, Typography } from "@mui/material";
-import React, { useRef } from "react";
-import { getConfig, putConfig } from "../configuration";
+import { useRef } from "react";
+import { Config, getConfig, putConfig } from "../configuration";
+import Ajv from "ajv";
 
+const ajv = new Ajv();
+const validate = ajv.compile(jsonSchema);
+
+function parseConfig(blob: string): Config {
+  const modifiedConfig = JSON.parse(blob);
+
+  const valid = validate(modifiedConfig);
+  if (!valid) {
+    const errors = validate.errors
+      ?.map(
+        (error) =>
+          `${error.instancePath} --> ${error.message}: ${JSON.stringify(error.params)}`,
+      )
+      .join("\n");
+    throw new Error(`Invalid config\n: ${errors}`);
+  }
+
+  return modifiedConfig as Config;
+}
 function JsonSchema() {
   const monacoRef = useRef<Monaco | null>(null);
 
@@ -22,8 +42,15 @@ function JsonSchema() {
   }
 
   function saveConf() {
-    const modifiedJson = monacoRef.current?.editor.getModels()[1].getValue()!;
-    putConfig(JSON.parse(modifiedJson));
+    const blob = monacoRef.current?.editor.getModels()[1].getValue()!;
+    let modifiedConfig;
+    try {
+      modifiedConfig = parseConfig(blob);
+    } catch (e) {
+      window.alert((e as any).message);
+      return;
+    }
+    putConfig(modifiedConfig);
     window.alert("Reloading page to reflect changes");
     window.location.reload();
   }
