@@ -1,11 +1,20 @@
 import { Grid2 as Grid } from "@mui/material";
-import { TypeToComp } from "../lib/TypeToComp";
+import {
+  ChartComponent,
+  Type,
+  TypeToChartConfig,
+  TypeToComp,
+} from "../lib/TypeToComp";
 import { getConfig } from "../configuration";
 
-// TODO: Fix type
-function renderComponent(compProps: any, key: number) {
-  const type = compProps.type;
-  const Component = TypeToComp[type];
+/**
+ * Utility function to help tsc track a particular Type to a particular Component
+ */
+function renderComponent<K extends Type>(
+  compProps: TypeToChartConfig[K],
+  key: number,
+) {
+  const Component = TypeToComp[compProps.type] as ChartComponent<K>;
   return (
     <Grid key={key} size={6}>
       <Component {...{ ...compProps.props }} />
