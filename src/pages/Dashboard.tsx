@@ -7,8 +7,8 @@ function renderComponent(compProps: any, key: number) {
   // @ts-ignore
   const Component = TypeToComp[type];
   return (
-    <Grid size={6}>
-      <Component key={key} {...{ ...compProps.props }} />
+    <Grid key={key} size={6}>
+      <Component {...{ ...compProps.props }} />
     </Grid>
   );
 }
