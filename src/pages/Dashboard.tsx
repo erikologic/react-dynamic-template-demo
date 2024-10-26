@@ -1,6 +1,6 @@
 import { Grid2 as Grid } from "@mui/material";
-import { configuration } from "../configuration";
 import { TypeToComp } from "../lib/TypeToComp";
+import { getConfig } from "../configuration";
 
 function renderComponent(compProps: any, key: number) {
   const type = compProps.type;
@@ -17,7 +17,7 @@ function renderComponent(compProps: any, key: number) {
 export default function Dashboard() {
   return (
       <Grid container spacing={2}>
-        {configuration.map((prop, i) => renderComponent(prop, i))}
+        {getConfig().map((prop, i) => renderComponent(prop, i))}
       </Grid>
   )
 }

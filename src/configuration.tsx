@@ -1,4 +1,4 @@
-export const configuration = [
+const defaultConf = [
   {
     type: "bar",
     props: {
@@ -42,3 +42,13 @@ export const configuration = [
     }
   },
 ];
+
+
+export const getConfig = (): typeof defaultConf => {
+  const localConfig = localStorage.getItem("dashboardConfig");
+  return localConfig ? JSON.parse(localConfig) : defaultConf;
+}
+
+export const setConfig = (config?: typeof defaultConf) => {
+  localStorage.setItem("dashboardConfig", JSON.stringify(config || defaultConf));
+}
