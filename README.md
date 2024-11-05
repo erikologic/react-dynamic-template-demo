@@ -1,9 +1,10 @@
 # React Dynamic Templating Demo
 
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/erikologic/react-dynamic-template-demo)  
+_Note: use 4 cores!_
+
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/erikologic/react-dynamic-template-demo)   
-_EDIT: It seems like StackBlitz has issues from time to time fetching from NPM._  
-_You can fork & launch this repo on [GitHub Codespaces](https://docs.github.com/en/codespaces/developing-in-a-codespace/creating-a-codespace-for-a-repository)._  
-_Use 4 cores or `npm install` will take forever!_
+
 
 This demo project showcases a type-safe templating system for React applications that is configurable via JSON.  
 The configuration is defined by JSON schemas, declared alongside the template React components.  
