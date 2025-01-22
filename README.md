@@ -23,6 +23,8 @@ A templating engine for React, build on top of JSONSchema.
 
 ## Screenshots
 
+_Note: UI is horrible, here only for demo purposes..._
+
 _Configurable dashboard PoC displaying dynamic components_  
 ![Dashboard](public/dashboard.png)
 
